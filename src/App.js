@@ -1,5 +1,4 @@
 import React from "react"
-import { render } from "react-dom"
 import { Router } from "@reach/router"
 import CustomComponent from "./components/CustomComponent";
 const App = () => {
@@ -14,4 +13,4 @@ const App = () => {
 	)
 }
 
-render(<App />, document.getElementById("root"));
+export default App
