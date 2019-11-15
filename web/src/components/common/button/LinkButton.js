@@ -1,8 +1,6 @@
 import React from 'react'
-
 import { Link } from "@reach/router"
-// import Button from './Button'
-import { Button } from "reactstrap"
+import Button from './Button'
 
 function LinkButton({to, children, className}) {
     return (
