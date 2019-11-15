@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react"
+import { Container } from "reactstrap"
 
 const CustomComponent = () => {
-    return (
-        <div>
-            <h1>Custom Route Component</h1>
-        </div>
-    );
+  return <h1>
+    Custom Route Component
+    </h1>
 }
 
-export default CustomComponent;
+export default CustomComponent
