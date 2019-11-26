@@ -3,10 +3,12 @@ import {UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle} from "
 
 function SelectField({items, allowEmpty, emptyOption, labelBy, valueBy, selectedItem, onSelect}) {
     const [_items, set_items] = useState(items)
-    console.log(items)
+    const [selected, setSelected] = useState(null)
+
     const getLabel = () => {
-        if (selectedItem) {
-            return selectedItem.name
+        if (selected) {
+            const target = items.find(item => item.value === selected)
+            return target.name
         } else {
             if (allowEmpty) {
                 return emptyOption ? emptyOption : "Choose One"
@@ -18,6 +20,7 @@ function SelectField({items, allowEmpty, emptyOption, labelBy, valueBy, selected
 
     useEffect(() => {
         standardizeItems()
+        setSelected(selectedItem)
     }, [])
 
     const standardizeItems = () => {
@@ -41,12 +44,12 @@ function SelectField({items, allowEmpty, emptyOption, labelBy, valueBy, selected
 
     const generateItems = () => {
         if (labelBy) {
+            return items.map((item, idx) => (
+                <DropdownItem value={item.value} key={idx} onClick={e => onSelect(e.target.value)}>
+                    {item.name}
+                </DropdownItem>
+            ))
         }
-        return items.map((item, idx) => (
-            <DropdownItem value={item.value} key={idx} onClick={event => onSelect(event)}>
-                {item.name}
-            </DropdownItem>
-        ))
     }
 
     return (

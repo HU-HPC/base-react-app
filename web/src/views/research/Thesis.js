@@ -6,7 +6,7 @@ import mockFaculty from "../../resource/data/mock_data/FacultyListPayload.json"
 
 const Thesis = () => {
 
-    const [faculty, setFaculty] = useState({})
+    const [faculty, setFaculty] = useState("")
 
     return (
         <>
@@ -87,7 +87,7 @@ const Thesis = () => {
                 Choosing an Advisor
             </CardHeader>
             <CardBody>
-                <SelectField items={mockFaculty} labelBy={i => i.last_name} valueBy={i => i.id} onSelect={(event) => setFaculty(event)} selectedItem={faculty}/>
+                <SelectField items={mockFaculty} labelBy={i => i.last_name} valueBy={i => i.id} onSelect={(value) => {console.log(value);return setFaculty(value)}} selectedItem={mockFaculty.find(f => f === faculty)}/>
             </CardBody>
         </Card>
 </>
