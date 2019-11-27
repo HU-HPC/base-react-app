@@ -1,10 +1,8 @@
-import os
-from sqlalchemy import create_engine
 from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 base = declarative_base()
+
 
 class InstructorSchema(base):
     __tablename__ = 'instructor'
@@ -14,3 +12,4 @@ class InstructorSchema(base):
         first_name = Column(String)
         last_name = Column(String)
         email = Column(String)
+

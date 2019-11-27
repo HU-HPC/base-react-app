@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.entity.instructor import InstructorSchema
+from src.project.entity.instructor import InstructorSchema
 
 
 class PostgresInstructorRepository(object):
