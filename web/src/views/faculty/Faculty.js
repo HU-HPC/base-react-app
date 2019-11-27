@@ -1,14 +1,14 @@
 import React from "react"
-import {Card, CardHeader, CardBody} from "reactstrap"
+import {Card, CardHeader, CardBody, CardDeck} from "reactstrap"
 
 const Faculty = () => {
     return (
-        <Card>
+        <CardDeck>
             <CardHeader>Faculty</CardHeader>
             <CardBody>
                 <h4>Place list of faculty here, table or card list. Not sure yet...</h4>
             </CardBody>
-        </Card>
+        </CardDeck>
     )
 }
 
