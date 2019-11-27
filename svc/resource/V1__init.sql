@@ -72,7 +72,7 @@ create table course_schedule(
     foreign key (semester_id) references semester (id)
 );
 
-create table course_semester(
+create table class(
     course_id bigserial ,
     semester_id bigserial ,
     instructor_id bigserial,
