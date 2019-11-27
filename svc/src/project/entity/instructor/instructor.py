@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 base = declarative_base()
 
 
-class InstructorSchema(base):
+class Instructor(base):
     __tablename__ = 'instructor'
 
     def __init__(self):

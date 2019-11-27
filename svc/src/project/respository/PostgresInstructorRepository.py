@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.project.entity.instructor import InstructorSchema
+from src.project.entity.instructor import instructor
 
 
 class PostgresInstructorRepository(object):
@@ -16,7 +16,7 @@ class PostgresInstructorRepository(object):
         self.session.commit()
 
     def get_all_instructors(self):
-        self.session.query(InstructorSchema)
+        self.session.query(instructor)
 
     def update_instructor(self, instructor, field, new_data):
         instructor.__setitem__(self, field, new_data)
