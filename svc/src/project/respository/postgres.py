@@ -43,12 +43,12 @@ class PostgresRepository(object):
         self.connection.execute(query) if (query is not None) else print("Nothing to update")
 
 
-foo = PostgresRepository()
-
-foo.find_all_instructors()
-foo.update_instructor(1, "email", "mshaalan@gmail.com")
-foo.find_all_instructors()
-foo.update_instructor(1, "email", "mshaalan@harrisburgu.edu")
-foo.find_all_instructors()
+# foo = PostgresRepository()
+#
+# foo.find_all_instructors()
+# foo.update_instructor(1, "email", "mshaalan@gmail.com")
+# foo.find_all_instructors()
+# foo.update_instructor(1, "email", "mshaalan@harrisburgu.edu")
+# foo.find_all_instructors()
 
 

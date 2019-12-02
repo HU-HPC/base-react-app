@@ -1,4 +1,4 @@
-from ..project.controller import *
+from src.project.http.endpoints import *
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 app = Flask('project')
