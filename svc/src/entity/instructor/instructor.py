@@ -1,15 +1,6 @@
-from sqlalchemy import Column, String
-from sqlalchemy.ext.declarative import declarative_base
-
-base = declarative_base()
-
-
-class Instructor(base):
-    __tablename__ = 'instructor'
-
-    def __init__(self):
-        id = Column(String, primary_key=True)
-        first_name = Column(String)
-        last_name = Column(String)
-        email = Column(String)
+class Instructor:
+    def __init__(self, first_name, last_name, email):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
 

@@ -5,4 +5,4 @@ app = Flask('project')
 app.config['SECRET_KEY'] = 'random'
 app.debug = True
 toolbar = DebugToolbarExtension(app)
-from src.http.endpoints import *
+from src.http.controller import *
