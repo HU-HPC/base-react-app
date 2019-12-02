@@ -1,7 +1,6 @@
 import sqlalchemy as db
 from sqlalchemy.orm import sessionmaker
 
-
 db_name = 'postgres'
 
 
@@ -40,7 +39,7 @@ class PostgresRepository(object):
         elif field == "last_name":
             query = instructor.values(last_name=value)
 
-        self.connection.execute(query) if (query is not None) else print("Nothing to update")
+        self.connection.execute(query) #if (query is not None) else print("Nothing to update")
 
 
 # foo = PostgresRepository()
