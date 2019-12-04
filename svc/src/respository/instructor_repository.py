@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 db_name = 'postgres'
 
 
-class PostgresRepository(object):
+class InstructorPostgresRepository(object):
     def __init__(self):
         self.engine = db.create_engine('postgres://user:pass@0.0.0.0:5432/postgres')  # postgres://user:pass@0.0.0.0:5432
         self.connection = self.engine.connect()
@@ -42,12 +42,5 @@ class PostgresRepository(object):
         self.connection.execute(query) #if (query is not None) else print("Nothing to update")
 
 
-# foo = PostgresRepository()
-#
-# foo.find_all_instructors()
-# foo.update_instructor(1, "email", "mshaalan@gmail.com")
-# foo.find_all_instructors()
-# foo.update_instructor(1, "email", "mshaalan@harrisburgu.edu")
-# foo.find_all_instructors()
 
 
