@@ -2,7 +2,7 @@ node_modules
 dist
 .cache
 .idea/
-
+env/
 svc/src/__pycache__/
 
 svc/src/entity/__pycache__/
