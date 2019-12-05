@@ -1,7 +1,10 @@
 create table course (
     id bigserial primary key ,
     name text,
-    code text
+    code text,
+    instructor_id int,
+    deleted boolean default false,
+    foreign key (instructor_id) references instructor (id)
 );
 
 create type term as enum('FALL', 'SPRING', 'SUMMER', 'LATE_FALL', 'LATE_SPRING', 'LATE_SUMMER');
