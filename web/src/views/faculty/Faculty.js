@@ -1,15 +1,33 @@
-import React from "react"
-import {Card, CardHeader, CardBody, CardDeck} from "reactstrap"
+import React, { useEffect, useState } from "react"
+import { Card, CardHeader, CardBody } from "reactstrap"
+import SelectField from "../../components/common/form/SelectField"
+import InstructorService from "../../service/InstructorService"
 
 const Faculty = () => {
-    return (
-        <CardDeck>
-            <CardHeader>Faculty</CardHeader>
-            <CardBody>
-                <h4>Place list of faculty here, table or card list. Not sure yet...</h4>
-            </CardBody>
-        </CardDeck>
-    )
+	const svc = new InstructorService()
+	const [instructors, setInstructors] = useState([])
+
+	const getInstructors = async () => {
+		const data = await svc.listInstructors()
+		setInstructors(data)
+	}
+
+	useEffect(() => {
+		getInstructors()
+	}, [])
+
+	return (
+		<Card>
+			<CardHeader>Faculty</CardHeader>
+			<CardBody>
+				<SelectField
+					items={instructors}
+					valueBy={item => item.email}
+					labelBy={item => item.first_name + " " + item.last_name}
+				/>
+			</CardBody>
+		</Card>
+	)
 }
 
 export default Faculty

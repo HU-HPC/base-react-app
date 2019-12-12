@@ -1,22 +1,22 @@
-import API from "./API"
-
-const BASE = "/instructor"
+import axios from "axios"
+const BASE = "instructor"
 
 class InstructorService {
-    listInstructors = () => {
-        const response = API.get(BASE)
-        return response.data
-    }
+	listInstructors = async () => {
+		const response = await axios.get(BASE)
+		const data = response.data
+		return data
+	}
 
-    createInstructor = request => {
-        const response = API.post(BASE, request)
-        return response.data
-    }
+	createInstructor = request => {
+		const response = axios.post(BASE, request)
+		return response.data
+	}
 
-    deleteInstructor = request => {
-        const response = API.delete(BASE)
-        return response.data
-    }
+	deleteInstructor = ({ id }) => {
+		const response = axios.delete(BASE + id)
+		return response.data
+	}
 }
 
 export default InstructorService
