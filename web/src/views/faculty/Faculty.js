@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from "react"
-import { Card, CardHeader, CardBody } from "reactstrap"
-import SelectField from "../../components/common/form/SelectField"
-import InstructorService from "../../service/InstructorService"
+import React, {useEffect, useState} from "react"
+import {Container, Button, Row, Col} from "reactstrap"
+import InstructorService from "service/InstructorService"
+import FacultyListGroup from "./FacultyListGroup"
+import BaseModal from "components/common/modal/BaseModal"
+
+import CreateInstructorForm from "./CreateInstructorForm"
 
 const Faculty = () => {
-	const svc = new InstructorService()
-	const [instructors, setInstructors] = useState([])
+    const [instructors, setInstructors] = useState([])
+    const [createInstuctor, setCreateInstuctor] = useState(false)
+    const svc = new InstructorService()
 
-	const getInstructors = async () => {
-		const data = await svc.listInstructors()
-		setInstructors(data)
-	}
+    const getInstructors = async () => {
+        const data = await svc.listInstructors()
+        setInstructors(data)
+    }
 
-	useEffect(() => {
-		getInstructors()
-	}, [])
-
-	return (
-		<Card>
-			<CardHeader>Faculty</CardHeader>
-			<CardBody>
-				<SelectField
-					items={instructors}
-					valueBy={item => item.email}
-					labelBy={item => item.first_name + " " + item.last_name}
-				/>
-			</CardBody>
-		</Card>
-	)
+    useEffect(() => {
+        getInstructors()
+    }, [])
+    return (
+        <>
+        <Container className="no-gutters">
+            <Row className="justify-content-between">
+                <Col>
+                    <h1>Faculty</h1>
+                </Col>
+                <Col style={{textAlign: "right"}}>
+                    <Button color="secondary" onClick={() => setCreateInstuctor(true)}>Add Instructor</Button>
+                </Col>
+            </Row>
+            <FacultyListGroup instructors={instructors} />
+        </Container>
+        <BaseModal isOpen={createInstuctor} title="Create Instructor" >
+            <CreateInstructorForm />
+        </BaseModal>
+        </>
+    )
 }
 
 export default Faculty

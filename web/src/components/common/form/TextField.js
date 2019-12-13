@@ -1,7 +1,7 @@
 import React from "react"
 import {Input, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap"
 
-const TextField = ({name, value, onChange, onBlur icon = "", addonType = "", type = "text"}) => {
+const TextField = ({name, value, onChange, onBlur, icon = "", addonType = "", type = "text"}) => {
     return icon ? (
         <InputGroup>
             <InputGroupAddon addonType={addonType}>
