@@ -1,5 +1,6 @@
 import React from "react"
 import { Col, Row, Card, CardBody, CardDeck, Input, Form, CardHeader, Label, FormGroup } from "reactstrap"
+import SelectTime from "./SelectTime"
 
 function AddCourse() {
     
@@ -49,52 +50,85 @@ function AddCourse() {
                                     <Input type="checkbox" name="S" />{' '}
                                     S
                                 </Label>
-                                <Input style={{ maxWidth:'70px', marginBottom: '10px', marginLeft:'15px' }} type="select" name="startHour" id="courseStartHour">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                </Input>
-                                <p style={{ marginTop: '7px', marginLeft: '4px' }}>
-                                    :
+                                <SelectTime />
+                                <p style={{ marginTop: '7px', marginLeft: '10px', marginRight: '-4px' }}>
+                                to
                                 </p>
-                                <Input style={{ maxWidth:'70px', marginBottom: '10px', marginLeft:'5px' }} type="select" name="startMinutes" id="courseStartMinutes">
-                                    <option>00</option>
-                                    <option>05</option>
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>20</option>
-                                    <option>25</option>
-                                    <option>30</option>
-                                    <option>35</option>
-                                    <option>40</option>
-                                    <option>45</option>
-                                    <option>50</option>
-                                    <option>55</option>
-                                </Input>
-                                <Input style={{ maxWidth:'70px', marginBottom: '10px', marginLeft:'5px' }} type="select" name="startAMPM" id="courseStartAMPM">
-                                    <option>AM</option>
-                                    <option>PM</option>
-                                </Input>
-                                <p style={{ marginTop: '7px', marginLeft: '4px' }}>
-                                    -
-                                </p>
+                                <SelectTime />
                             </Row>
                         <Input style={{ marginBottom: '20px', marginRight: '15px'}} type="text" id="courseInstructor" placeholder="Building, Floor, Room #"/> 
-                        <Label for="courseInstructor">Office Hours</Label>
-                        <Input style={{ marginBottom: '20px' }} type="text" id="courseInstructor" placeholder="Building, Floor, Room #"/>
+                        <Label for="courseOffice">Office Hours</Label>
+                        
+                        <Input style={{ marginBottom: '20px' }} type="text" id="courseOffice" placeholder="Building, Floor, Room #"/>
                         </div>                    
                     </Form>
                 </CardBody>
             </Card> 
+            <Card>
+                <CardHeader>Course Description</CardHeader>
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseDesc" id="courseDesc" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Course Prerequesites</CardHeader>
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="coursePrereq" id="coursePrereq" />
+                    </CardBody>
+                </Form>
+                
+            </Card>
+            <Card>
+                <CardHeader>Expected Knowledge at the Start of the Course</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseReq" id="courseReq" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Course Assessment</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseAssessment" id="courseAssessment" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Course Learning Outcomes</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseLO" id="courseLO" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Course Learning Outcomes (CLOs)</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseCLOs" id="courseCLOs" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Textbooks and References</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseTexts" id="courseTexts" />
+                    </CardBody>
+                </Form>
+            </Card>
+            <Card>
+                <CardHeader>Textbooks and References</CardHeader>   
+                <Form>
+                    <CardBody>
+                        <Input type="textarea" name="courseTexts" id="courseTexts" />
+                    </CardBody>
+                </Form>
+            </Card>          
         </div>
     )
 }
