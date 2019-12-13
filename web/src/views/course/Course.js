@@ -11,17 +11,14 @@ function Course() {
         </div>
     )
 
-
-
-
-//    return (
-//    <div>
-//        <CourseView/>
-//        <CourseView/>
-//        <CourseView/>
-//        <CourseView/>
-//    </div>
-//    )
+    // return (
+    // <div>
+    //     <CourseView/>
+    //     <CourseView/>
+    //     <CourseView/>
+    //     <CourseView/>
+    // </div>
+    // )
 }
 
 export default Course
