@@ -4,7 +4,8 @@ from ..controller import json_response
 from src import app
 from src.respository import CoursePostgresRepository
 from src.entity.course import Course
-from src.usecase.course_usecase import create
+from ..request import from_request
+from src.usecase.course_usecase import CourseUsecase
 
 repo = CoursePostgresRepository()
 
@@ -18,10 +19,11 @@ def list_course():
 
 @app.route("/course", methods=["POST"])
 def create_course():
-    r = request
-    course = Course(r.form.get("code"), r.form.get("name"), r.form.get("instructor"), r.form.get("semester"))
-    create(course)
-    return json_response(request.form)
+    ccr = from_request(request)
+    course = Course(ccr.request.get("code"), ccr.request.get("name"), ccr.request.get("instructor_id"))
+    cu = CourseUsecase()
+    id = cu.create(course)
+    return json_response({"course_id": id})
 
 
 @app.route("/course/<string:id>", methods=["DELETE"])
