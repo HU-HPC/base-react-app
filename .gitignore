@@ -11,3 +11,7 @@ svc/src/entity/__pycache__/
 svc/src/http/__pycache__/
 
 *.pyc
+
+*.icloud
+
+web/.DS_Store
