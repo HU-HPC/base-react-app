@@ -1,12 +1,13 @@
 import React from "react"
+import {Formik, Field} from "formik"
+import {Form} from "reactstrap"
 
-import {Formik} from "formik"
-
-function BaseForm({defaults, schema, onSubmit, children}) {
-    console.log(children)
+const BaseForm = ({defaults, schema, onSubmit, children}) => {
     return (
-        <Formik initialErrors={defaults} validationSchema={schema} onSubmit={values => console.log(values)}>
-            {children}
+        <Formik initialValues={defaults} validationSchema={schema} onSubmit={values => console.log(values)}>
+            {props => {
+                return <Form onSubmit={props.handleSubmit}>{children}</Form>
+            }}
         </Formik>
     )
 }

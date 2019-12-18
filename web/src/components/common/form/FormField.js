@@ -1,15 +1,13 @@
 import React from "react"
-
 import {FormGroup, Label} from "reactstrap"
+import {Field} from "formik"
 
-const FormField = ({label, target, name}) => {
-    console.log(target)
-
+const FormField = ({label, target, name, ...props}) => {
+    console.log(target, props)
     return (
-        <FormGroup>
-            <Label htmlFor={name}>{label}</Label>
-            {target}
-        </FormGroup>
+        <Field name={name} component={target}>
+            <Label for={name}>{label}</Label>
+        </Field>
     )
 }
 

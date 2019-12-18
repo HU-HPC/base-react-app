@@ -15,3 +15,5 @@ svc/src/http/__pycache__/
 *.icloud
 
 web/.DS_Store
+
+.DS_Store

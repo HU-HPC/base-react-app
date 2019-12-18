@@ -1,7 +1,9 @@
 import React from "react"
 import {Input, InputGroup, InputGroupAddon, InputGroupText} from "reactstrap"
+import {Field} from "formik"
 
-const TextField = ({name, value, onChange, onBlur, icon = "", addonType = "", type = "text"}) => {
+const TextField = ({icon, addonType, field, form: {touched, errors}}) => {
+    console.log(field, touched, errors)
     return icon ? (
         <InputGroup>
             <InputGroupAddon addonType={addonType}>
@@ -9,10 +11,26 @@ const TextField = ({name, value, onChange, onBlur, icon = "", addonType = "", ty
                     <i className={icon} />
                 </InputGroupText>
             </InputGroupAddon>
-            <Input name={name} value={value} id={name} type={type} onChange={onChange} onBlur={onBlur} />
+            <Input
+                name={field.name}
+                value={field.value}
+                id={field.name}
+                type="text"
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                tag={Field}
+            />
         </InputGroup>
     ) : (
-        <Input onChange={onChange} onBlur={onBlur} name={name} value={value} id={name} type={type} />
+        <Input
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            name={field.name}
+            // value={value}
+            // id={name}
+            // type={type}
+            // tag={Field}
+        />
     )
 }
 
