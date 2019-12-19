@@ -1,14 +1,17 @@
 import React from "react"
-import {FormGroup, Label} from "reactstrap"
-import {Field} from "formik"
+import { FormGroup, Label, FormFeedback } from "reactstrap"
+import { useField } from "formik"
+import TextField from "./field/TextField"
 
-const FormField = ({label, target, name, ...props}) => {
-    console.log(target, props)
-    return (
-        <Field name={name} component={target}>
-            <Label for={name}>{label}</Label>
-        </Field>
-    )
+const FormField = ({ label, ...props }) => {
+	const [field, meta] = useField(props)
+	return (
+		<FormGroup>
+			<Label>{label}</Label>
+			<TextField {...field} {...props} meta={meta} />
+			{meta.error ? <div>{meta.error}</div> : null}
+		</FormGroup>
+	)
 }
 
 export default FormField
