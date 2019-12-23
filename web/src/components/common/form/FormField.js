@@ -1,22 +1,11 @@
 import React from "react"
-import {FormGroup, Label, FormFeedback, Input} from "reactstrap"
+import {FormGroup, Label} from "reactstrap"
 
-
-const FormField = ({label, name, type, ...props}) => {
-    // const [field, meta] = useField(props)
-    console.log(props)
+const FormField = ({label, name, target}) => {
     return (
         <FormGroup>
             <Label for={name}>{label}</Label>
-            <Input
-                id={name}
-                type={type}
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values[name]}
-                name={NamedNodeMap}
-            />
-            {props.errors[name] ? <FormFeedback className="d-block">{props.errors[name]}</FormFeedback> : null}
+            {target}
         </FormGroup>
     )
 }
