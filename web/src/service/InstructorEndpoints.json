@@ -11,5 +11,13 @@
 	"delete": {
 		"method": "DELETE",
 		"url": ""
+	},
+	"get": {
+		"method": "GET",
+		"url": ""
+	},
+	"edit": {
+		"method": "POST",
+		"url": "/edit"
 	}
 }
