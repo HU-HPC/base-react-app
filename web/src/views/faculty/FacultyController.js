@@ -4,6 +4,7 @@ class FacultyController {
 	}
 
 	createInstructor = (instructor) => {
+		console.log(this.actions.createInstructor, instructor)
 		return this.actions.createInstructor(instructor)
 	}
 

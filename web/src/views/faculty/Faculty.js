@@ -7,59 +7,72 @@ import InstructorEndpoints from 'service/InstructorEndpoints'
 import CreateInstructor from 'views/faculty/CreateInstructor'
 import FacultyContext from './FacultyContext'
 import FacultyController from './FacultyController'
+import InstructorService from '../../service/InstructorService'
+import { setIn } from 'formik'
 
 const Faculty = () => {
+	const [ isLoading, setIsLoading ] = useState(false)
 	const [ instructors, setInstructors ] = useState([])
 	const [ selectedInstructor, setSelectedInstructor ] = useState(null)
-	const listInstructors = useAxios({ url: InstructorEndpoints.base, method: InstructorEndpoints.list.method })
-	const createInstructor = useAxios(
-		{ url: InstructorEndpoints.base, method: InstructorEndpoints.base.method },
-		{ manual: true },
-	)
-	const deleteInstructor = useAxios(
-		{ url: InstructorEndpoints.base, method: InstructorEndpoints.delete.method },
-		{ manual: true },
-	)
-	const editInstructor = useAxios(
-		{ url: InstructorEndpoints.base, method: InstructorEndpoints.edit.method },
-		{ manual: true },
-	)
-	const getInstructor = useAxios(
-		{ url: InstructorEndpoints.base, method: InstructorEndpoints.get.method },
-		{ manual: true },
-	)
+	const svc = new InstructorService()
+	// const listInstructors = useAxios({ url: InstructorEndpoints.base, method: InstructorEndpoints.list.method })
+	// const createInstructor = useAxios(
+	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.base.method },
+	// 	{ manual: true },
+	// )
+	// const deleteInstructor = useAxios(
+	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.delete.method },
+	// 	{ manual: true },
+	// )
+	// const editInstructor = useAxios(
+	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.edit.method },
+	// 	{ manual: true },
+	// )
+	// const getInstructor = useAxios(
+	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.get.method },
+	// 	{ manual: true },
+	// )
 
-	const fetchInstructor = (id) => {
-		getInstructor({
-			data: {
-				...getInstructor[0].data,
-				id: id,
-			},
-		})
-	}
+	// const fetchInstructor = (id) => {
+	// 	getInstructor({
+	// 		data: {
+	// 			...getInstructor[0].data,
+	// 			id: id,
+	// 		},
+	// 	})
+	// }
 
-	useEffect(
-		() => {
-			if (!listInstructors[0].loading) {
-				setInstructors(listInstructors[0].data)
-			}
-		},
-		[ listInstructors[0].loading ],
-	)
+	// const _createInstructor = (instructor) => {
+	// 	createInstructor({
+	// 		data: {
+	// 			...createInstructor[0].data,
+	// 			...instructor,
+	// 		},
+	// 	})
+	// }
 
-	const actions = {
-		createInstructor,
-		deleteInstructor,
-		editInstructor,
-		fetchInstructor,
-	}
+	useEffect(() => {
+		setIsLoading(true)
+		fetch = async () => {
+			setInstructors(await svc.listInstructor())
+		}
+		fetch()
+		setIsLoading(false)
+	}, [])
+
+	// const actions = {
+	// 	createInstructor: _createInstructor,
+	// 	deleteInstructor,
+	// 	editInstructor,
+	// 	fetchInstructor,
+	// }
 
 	const modalControls = {
 		openModal: (id) => setSelectedInstructor(id),
 	}
 
 	return (
-		<FacultyContext.Provider value={[ { controller: new FacultyController(actions) }, modalControls ]}>
+		<FacultyContext.Provider value={svc}>
 			<Container className="no-gutters">
 				<Row className="justify-content-between">
 					<Col>

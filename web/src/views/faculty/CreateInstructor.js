@@ -63,8 +63,7 @@ const CreateInstructorForm = ({ schema, defaults, onSubmit }) => {
 }
 
 const CreateInstructor = ({ selectedInstructor }) => {
-	const [ controller ] = useContext(FacultyContext)
-	console.log(controller)
+	const [ { controller } ] = useContext(FacultyContext)
 	const toSchema = (instructorObject) => ({
 		id: instructorObject.id,
 		first_name: instructorObject.first_name,
@@ -74,15 +73,17 @@ const CreateInstructor = ({ selectedInstructor }) => {
 
 	const initVal = selectedInstructor === -1 ? DEFAULTS : toSchema(controller.fetchInstructor(selectedInstructor))
 
+	const submit = (values) => {
+		if (!values.id) {
+			delete values.id
+		}
+
+		return controller.createInstructor(values)
+	}
+
 	return (
 		<Container>
-			<CreateInstructorForm
-				defaults={initVal}
-				schema={SCHEMA}
-				onSubmit={(values) => {
-					console.log(values)
-				}}
-			/>
+			<CreateInstructorForm defaults={initVal} schema={SCHEMA} onSubmit={(values) => submit(values)} />
 		</Container>
 	)
 }

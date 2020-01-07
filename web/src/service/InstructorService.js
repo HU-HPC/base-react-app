@@ -1,30 +1,40 @@
-import useAxios from "axios-hooks"
-import InstructorModel from "model/InstructorModel"
+import useAxios from 'axios-hooks'
+import axios from 'axios'
+import InstructorModel from 'model/InstructorModel'
 
-const BASE = { url: "instructor" }
+const BASE = { url: 'instructor' }
 
-const GET = { method: "GET" }
-const POST = { methood: "POST" }
-const DELETE = { methood: "DELETE" }
+const GET = { method: 'GET' }
+const POST = { methood: 'POST' }
+const DELETE = { methood: 'DELETE' }
 
 class InstructorService {
-	listInstructors = () => {
-		const response = useAxios({ ...BASE, ...GET })
+	// listInstructors = () => {
+	// 	const response = useAxios({ ...BASE, ...GET })
+	// 	const instructors = []
+	// 	for (const o of response[0].data) {
+	// 		instructors.push(InstructorModel.fromObject(o))
+	// 	}
+	// 	response[0].rawData = response[0].data
+	// 	response[0].data = instructors
+	// 	return response
+	// }
+
+	listInstructor = async () => {
+		const response = await axios.get('/instructor')
 		const instructors = []
-		for (const o of response[0].data) {
+		for (const o of response.data) {
 			instructors.push(InstructorModel.fromObject(o))
 		}
-		response[0].rawData = response[0].data
-		response[0].data = instructors
-		return response
+		return instructors
 	}
 
-	createInstructor = request => {
+	createInstructor = (request) => {
 		const response = useAxios({ ...BASE, ...POST, options: request })
 		return response
 	}
 
-	deleteInstructor = id => {
+	deleteInstructor = (id) => {
 		const response = useAxios({ ...BASE, ...DELETE, options: { id: id } })
 		return response
 	}
