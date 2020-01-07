@@ -5,7 +5,8 @@ build
 .idea/
 env/
 svc/src/__pycache__/
-
+svc/venv3/
+svc/env/
 svc/src/entity/__pycache__/
 
 svc/src/http/__pycache__/
