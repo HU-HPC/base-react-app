@@ -76,14 +76,6 @@ const CreateInstructor = ({ selectedInstructor, createInstructor }) => {
 
 	const initVal = selectedInstructor === -1 ? DEFAULTS : toSchema(selectedInstructor)
 
-	const submit = (values) => {
-		if (!values.id) {
-			delete values.id
-		}
-
-		return controller.createInstructor(values)
-	}
-
 	return (
 		<Container>
 			<CreateInstructorForm
