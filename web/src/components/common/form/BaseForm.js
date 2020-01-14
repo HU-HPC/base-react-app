@@ -1,14 +1,16 @@
 import React from "react"
-import * as Yup from "yup"
-import {Formik} from "formik"
-import {Form as RSForm} from "reactstrap"
+import { Formik } from "formik"
+import { Form } from "reactstrap"
 
-function BaseForm({DEFAULT, SCHEMA, onSubmit, children}) {
-    return (
-        <Formik initialErrors={DEFAULT} validationSchema={SCHEMA}>
-            <RSForm onSubmit={onSubmit}>{children}</RSForm>
-        </Formik>
-    )
+const BaseForm = ({ children, schema, defaults, onSubmit }) => {
+	return (
+		// <Formik validationSchema={schema} initialValues={defaults} onSubmit={values => console.log(values)}>
+		// 	{({ handleSubmit, handleChange, handleBlur, values, errors }) => {
+		// 		return <Form onSubmit={handleSubmit}>{children}</Form>
+		// 	}}
+		// </Formik>
+		<Form onSubmit={onSubmit}>{children}</Form>
+	)
 }
 
 export default BaseForm

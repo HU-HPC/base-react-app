@@ -1,0 +1,23 @@
+{
+	"base": "instructor",
+	"create": {
+		"method": "POST",
+		"url": ""
+	},
+	"list": {
+		"method": "GET",
+		"url": ""
+	},
+	"delete": {
+		"method": "DELETE",
+		"url": ""
+	},
+	"get": {
+		"method": "GET",
+		"url": ""
+	},
+	"edit": {
+		"method": "POST",
+		"url": "/edit"
+	}
+}

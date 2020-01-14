@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "fe78857b-7d85-4d5c-b029-84823f1ac1cd",
+		"name": "Portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Instructor",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"Caleb\",\n\t\"last_name\": \"Druckemiller\",\n\t\"email\": \"cdruckemiller@harrisburgu.ed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}:{{local_port}}/instructor",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"instructor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}:{{local_port}}/instructor?id=16",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"instructor"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e0d9435-6265-4bd7-ab25-856049f3d184",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}:{{local_port}}/instructor/123",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"instructor",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Instructor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}:{{local_port}}/instructor?id=1",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"instructor"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "code",
+									"value": "CISC 525",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Big Data Architecture",
+									"type": "text"
+								},
+								{
+									"key": "instructor_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}:{{local_port}}/course",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}:{{local_port}}/course",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
