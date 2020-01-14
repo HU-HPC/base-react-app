@@ -15,7 +15,8 @@ class InstructorPostgresRepository(object):
         return ResultSet
 
     def create_instructor(self, instructor):
-        query = db.insert(self.instructor_table).values(first_name=instructor.first_name, last_name=instructor.last_name, email=instructor.email)
+        query = db.insert(self.instructor_table).values(first_name=instructor.first_name,
+                                                        last_name=instructor.last_name, email=instructor.email)
         connection.execute(query)
 
     def delete_instructor(self, id):
@@ -32,4 +33,13 @@ class InstructorPostgresRepository(object):
         elif field == "last_name":
             query = instructor.values(last_name=value)
 
-        connection.execute(query)   # if (query is not None) else print("Nothing to update")
+        connection.execute(query)  # if (query is not None) else print("Nothing to update")
+
+    def get_instructor(self, id):
+        # query = db.select([self.instructor_table]).where(db.and_(self.instructor_table.columns.deleted is False, self.instructor_table.columns.id == id))
+        query = db.select([self.instructor_table]).where(db.and_(self.instructor_table.columns.deleted == False,
+                                                                 self.instructor_table.columns.id == id))
+        print(query)
+        ResultProxy = connection.execute(query)
+        ResultSet = ResultProxy.fetchall()
+        return ResultSet
