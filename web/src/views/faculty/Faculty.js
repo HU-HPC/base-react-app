@@ -1,84 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Button, Row, Col } from 'reactstrap'
-import FacultyListGroup from './FacultyListGroup'
-import BaseModal from 'components/common/modal/BaseModal'
-import useAxios from 'axios-hooks'
-import InstructorEndpoints from 'service/InstructorEndpoints'
-import CreateInstructor from 'views/faculty/CreateInstructor'
-import FacultyContext from './FacultyContext'
-import FacultyController from './FacultyController'
-import InstructorService from '../../service/InstructorService'
-import { setIn } from 'formik'
+import React, { useEffect, useState } from "react"
+import { Container, Button, Row, Col } from "reactstrap"
+import FacultyListGroup from "./FacultyListGroup"
+import BaseModal from "components/common/modal/BaseModal"
+import CreateInstructor from "views/faculty/CreateInstructor"
+import FacultyContext from "./FacultyContext"
+import InstructorService from "service/InstructorService"
 
 const Faculty = () => {
-	const [ isLoading, setIsLoading ] = useState(false)
-	const [ instructors, setInstructors ] = useState([])
-	const [ selectedInstructor, setSelectedInstructor ] = useState(null)
-	const svc = new InstructorService()
-	// const listInstructors = useAxios({ url: InstructorEndpoints.base, method: InstructorEndpoints.list.method })
-	// const createInstructor = useAxios(
-	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.base.method },
-	// 	{ manual: true },
-	// )
-	// const deleteInstructor = useAxios(
-	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.delete.method },
-	// 	{ manual: true },
-	// )
-	// const editInstructor = useAxios(
-	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.edit.method },
-	// 	{ manual: true },
-	// )
-	// const getInstructor = useAxios(
-	// 	{ url: InstructorEndpoints.base, method: InstructorEndpoints.get.method },
-	// 	{ manual: true },
-	// )
-
-	// const fetchInstructor = (id) => {
-	// 	getInstructor({
-	// 		data: {
-	// 			...getInstructor[0].data,
-	// 			id: id,
-	// 		},
-	// 	})
-	// }
-
-	// const _createInstructor = (instructor) => {
-	// 	createInstructor({
-	// 		data: {
-	// 			...createInstructor[0].data,
-	// 			...instructor,
-	// 		},
-	// 	})
-	// }
+	const [instructors, setInstructors] = useState([])
+	const [selectedInstructorId, setSelectedInstructorId] = useState("")
+	const [selectedInstructor, setSelectedInstructor] = useState(null)
+	const svc = new InstructorService(false)
 
 	useEffect(() => {
-		setIsLoading(true)
-		fetch = async () => {
-			setInstructors(await svc.listInstructor())
+		const doSomething = async () => {
+			if (selectedInstructorId) {
+				fetchInstructor(selectedInstructorId)
+			}
+			return setInstructors(await svc.listInstructors())
 		}
-		fetch()
-		setIsLoading(false)
-	}, [])
+		doSomething()
+	}, [selectedInstructorId])
 
-	// const actions = {
-	// 	createInstructor: _createInstructor,
-	// 	deleteInstructor,
-	// 	editInstructor,
-	// 	fetchInstructor,
-	// }
+	const facultyControlls = {
+		openModal: instructor => setSelectedInstructorId(instructor),
+		deleteInstructor: id => deleteInstructor(id),
+	}
 
-	const modalControls = {
-		openModal: (id) => setSelectedInstructor(id),
+	const createInstructor = payload => {
+		console.log(payload)
+		svc.createInstructor(payload)
+		setSelectedInstructorId("")
+	}
+
+	const fetchInstructor = id => {
+		setSelectedInstructor(svc.fetchInstructor(id))
+	}
+
+	const deleteInstructor = id => {
+		return svc.deleteInstructor(id)
 	}
 
 	return (
-		<FacultyContext.Provider value={svc}>
-			<Container className="no-gutters">
+		<FacultyContext.Provider value={facultyControlls}>
+			<Container>
 				<Row className="justify-content-between">
 					<Col>
 						<h1>Faculty</h1>
 					</Col>
-					<Col style={{ textAlign: 'right' }}>
+					<Col style={{ textAlign: "right" }}>
 						<Button color="secondary" onClick={() => setSelectedInstructor(-1)}>
 							Add Instructor
 						</Button>
@@ -87,10 +57,15 @@ const Faculty = () => {
 				<FacultyListGroup instructors={instructors} />
 			</Container>
 			<BaseModal
-				isOpen={selectedInstructor}
+				isOpen={!!selectedInstructor}
 				closeModal={() => setSelectedInstructor(null)}
-				title="Create Instructor">
-				<CreateInstructor selectedInstructor={selectedInstructor} />
+				title="Create Instructor"
+			>
+				<CreateInstructor
+					selectedInstructor={selectedInstructor}
+					createInstructor={createInstructor}
+					fetchInstructor={fetchInstructor}
+				/>
 			</BaseModal>
 		</FacultyContext.Provider>
 	)

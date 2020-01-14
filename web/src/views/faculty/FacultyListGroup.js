@@ -1,23 +1,19 @@
-import React from 'react'
-import { ListGroup, Row, Col } from 'reactstrap'
-import InstructorCard from './InstructorCard'
+import React from "react"
+import { Row, Col } from "reactstrap"
+import InstructorCard from "./InstructorCard"
 
 const FacultyListGroup = ({ instructors }) => {
 	const generateItems = () => {
-		return instructors.map((instructor) => {
+		return instructors.map(instructor => {
 			return (
-				<Col size="3" key={instructor.id}>
+				<Col key={instructor.id}>
 					<InstructorCard instructor={instructor} />
 				</Col>
 			)
 		})
 	}
 
-	return (
-		<ListGroup>
-			<Row>{generateItems()}</Row>
-		</ListGroup>
-	)
+	return <Row>{generateItems()}</Row>
 }
 
 export default FacultyListGroup

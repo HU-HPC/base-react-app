@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import * as Yup from 'yup'
-import ValidationMessage from 'service/validation/ValidationMessage'
-import { Row, Col, Container, Button, Form } from 'reactstrap'
-import { Formik } from 'formik'
-import { FormField, TextField } from 'components/common/form'
-import FacultyContext from './FacultyContext'
+import React from "react"
+import * as Yup from "yup"
+import ValidationMessage from "service/validation/ValidationMessage"
+import { Row, Col, Container, Button, Form } from "reactstrap"
+import { Formik } from "formik"
+import { FormField, TextField } from "components/common/form"
 
 const SCHEMA = Yup.object().shape({
 	id: Yup.string(),
@@ -14,19 +13,19 @@ const SCHEMA = Yup.object().shape({
 })
 
 const DEFAULTS = {
-	id: '',
-	first_name: '',
-	last_name: '',
-	email: '',
+	id: "",
+	first_name: "",
+	last_name: "",
+	email: "",
 }
 
 const CreateInstructorForm = ({ schema, defaults, onSubmit }) => {
 	return (
 		<Formik validationSchema={schema} onSubmit={onSubmit} initialValues={defaults}>
-			{(props) => (
+			{props => (
 				<React.Fragment>
 					<Row>
-						<Form onSubmit={props.handleSubmit} style={{ width: '100%' }}>
+						<Form onSubmit={props.handleSubmit} style={{ width: "100%" }}>
 							<Col>
 								<FormField
 									name="first_name"
@@ -53,7 +52,7 @@ const CreateInstructorForm = ({ schema, defaults, onSubmit }) => {
 							</Col>
 						</Form>
 					</Row>
-					<Button type="submit" onClick={(values) => props.handleSubmit(values)}>
+					<Button type="submit" onClick={values => props.handleSubmit(values)}>
 						Submit
 					</Button>
 				</React.Fragment>
@@ -62,16 +61,20 @@ const CreateInstructorForm = ({ schema, defaults, onSubmit }) => {
 	)
 }
 
-const CreateInstructor = ({ selectedInstructor }) => {
-	const [ { controller } ] = useContext(FacultyContext)
-	const toSchema = (instructorObject) => ({
-		id: instructorObject.id,
-		first_name: instructorObject.first_name,
-		last_name: instructorObject.last_name,
-		email: instructorObject.email,
-	})
+const CreateInstructor = ({ selectedInstructor, createInstructor }) => {
+	console.log(selectedInstructor)
+	const toSchema = instructorObject => {
+		if (instructorObject) {
+			return {
+				id: instructorObject.id,
+				first_name: instructorObject.first_name,
+				last_name: instructorObject.last_name,
+				email: instructorObject.email,
+			}
+		}
+	}
 
-	const initVal = selectedInstructor === -1 ? DEFAULTS : toSchema(controller.fetchInstructor(selectedInstructor))
+	const initVal = selectedInstructor === -1 ? DEFAULTS : toSchema(selectedInstructor)
 
 	const submit = (values) => {
 		if (!values.id) {
@@ -83,7 +86,13 @@ const CreateInstructor = ({ selectedInstructor }) => {
 
 	return (
 		<Container>
-			<CreateInstructorForm defaults={initVal} schema={SCHEMA} onSubmit={(values) => submit(values)} />
+			<CreateInstructorForm
+				defaults={initVal}
+				schema={SCHEMA}
+				onSubmit={values => {
+					createInstructor(values)
+				}}
+			/>
 		</Container>
 	)
 }

@@ -1,42 +1,50 @@
-import useAxios from 'axios-hooks'
-import axios from 'axios'
-import InstructorModel from 'model/InstructorModel'
+import axios from "axios"
+import InstructorModel from "model/InstructorModel"
+import mockFaculty from "resource/data/mock_data/FacultyListPayload"
 
-const BASE = { url: 'instructor' }
-
-const GET = { method: 'GET' }
-const POST = { methood: 'POST' }
-const DELETE = { methood: 'DELETE' }
+const BASE = "instructor"
 
 class InstructorService {
-	// listInstructors = () => {
-	// 	const response = useAxios({ ...BASE, ...GET })
-	// 	const instructors = []
-	// 	for (const o of response[0].data) {
-	// 		instructors.push(InstructorModel.fromObject(o))
-	// 	}
-	// 	response[0].rawData = response[0].data
-	// 	response[0].data = instructors
-	// 	return response
-	// }
+	constructor(mock) {
+		if (mock) {
+			this.mock = true
+		} else {
+			this.mock = false
+		}
+	}
 
-	listInstructor = async () => {
-		const response = await axios.get('/instructor')
+	listInstructors = async () => {
 		const instructors = []
+		if (this.mock) {
+			for (const o of mockFaculty) {
+				instructors.push(InstructorModel.fromObject(o))
+			}
+			return instructors
+		}
+		const response = await axios.get(BASE)
 		for (const o of response.data) {
 			instructors.push(InstructorModel.fromObject(o))
 		}
+
 		return instructors
 	}
 
-	createInstructor = (request) => {
-		const response = useAxios({ ...BASE, ...POST, options: request })
-		return response
+	createInstructor = request => {
+		return axios.post(BASE, request)
 	}
 
-	deleteInstructor = (id) => {
-		const response = useAxios({ ...BASE, ...DELETE, options: { id: id } })
-		return response
+	fetchInstructor = async id => {
+		const response = await axios.get(BASE + "?id=" + id)
+
+		if (response.data[0]) {
+			const insturctor = InstructorModel.fromObject(response.data[0])
+			console.log(insturctor)
+			return insturctor
+		}
+	}
+
+	deleteInstructor = id => {
+		return axios.delete(BASE + "/" + id)
 	}
 }
 

@@ -1,11 +1,13 @@
 import React from "react"
 import { Input, FormFeedback } from "reactstrap"
 
-const TextField = ({ name, ...props }) => {
+const TextField = ({ ...props }) => {
 	return (
 		<>
-			<Input onChange={props.handleChange} onBlur={props.handleBlur} name={name} value={props.value} />
-			{props.errors[name] ? <FormFeedback className="d-block">{props.errors[name]}</FormFeedback> : null}
+			<Input onChange={props.handleChange} onBlur={props.handleBlur} name={props.name} value={props.value} />
+			{props.errors[props.name] ? (
+				<FormFeedback className="d-block">{props.errors[props.name]}</FormFeedback>
+			) : null}
 		</>
 	)
 }

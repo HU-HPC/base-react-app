@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae23a0bd-9e52-4a5c-811e-7b8257bf9285",
+		"_postman_id": "fe78857b-7d85-4d5c-b029-84823f1ac1cd",
 		"name": "Portal",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,26 +12,22 @@
 					"name": "Create",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "first_name",
-									"value": "Ryan",
-									"type": "text"
-								},
-								{
-									"key": "last_name",
-									"value": "Seacrest",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "rseacrest@harrisburgu.edu",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"Caleb\",\n\t\"last_name\": \"Druckemiller\",\n\t\"email\": \"cdruckemiller@harrisburgu.ed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{local}}:{{local_port}}/instructor",
@@ -52,13 +48,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{local}}:{{local_port}}/instructor?",
+							"raw": "{{local}}:{{local_port}}/instructor?id=16",
 							"host": [
 								"{{local}}"
 							],
 							"port": "{{local_port}}",
 							"path": [
 								"instructor"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "16"
+								}
 							]
 						}
 					},
@@ -90,6 +92,30 @@
 							"path": [
 								"instructor",
 								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Instructor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}:{{local_port}}/instructor?id=1",
+							"host": [
+								"{{local}}"
+							],
+							"port": "{{local_port}}",
+							"path": [
+								"instructor"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
