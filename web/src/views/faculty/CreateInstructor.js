@@ -78,13 +78,7 @@ const CreateInstructor = ({ selectedInstructor, createInstructor }) => {
 
 	return (
 		<Container>
-			<CreateInstructorForm
-				defaults={initVal}
-				schema={SCHEMA}
-				onSubmit={values => {
-					createInstructor(values)
-				}}
-			/>
+			<CreateInstructorForm defaults={initVal} schema={SCHEMA} onSubmit={values => createInstructor(values)} />
 		</Container>
 	)
 }

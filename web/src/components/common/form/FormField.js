@@ -1,9 +1,9 @@
-import React from 'react'
-import { FormGroup, Label } from 'reactstrap'
+import React from "react"
+import { FormGroup, Label } from "reactstrap"
 
-const FormField = ({ label, name, target, ...props }) => {
+const FormField = ({ label, name, target, className }) => {
 	return (
-		<FormGroup>
+		<FormGroup className={className}>
 			<Label for={name}>{label}</Label>
 			{target}
 		</FormGroup>

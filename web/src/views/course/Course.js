@@ -1,24 +1,30 @@
-import React from "react"
-// import { FontAwesomeIcon } from 'font-awesome'
-import CourseView from "./CourseView"
-import AddCourse from "./AddCourse"
+import React, { useEffect, useState } from "react"
+import CourseBuilder from "./CourseBuilder"
+import InstructorService from "service/InstructorService"
 
-function Course() {
- 
-    return (
-        <div>
-            <AddCourse/>
-        </div>
-    )
+const Course = () => {
+	const instructorSvc = new InstructorService()
 
-    // return (
-    // <div>
-    //     <CourseView/>
-    //     <CourseView/>
-    //     <CourseView/>
-    //     <CourseView/>
-    // </div>
-    // )
+	const [instructors, setInstructors] = useState([])
+
+	useEffect(() => {
+		const fetchData = async () => {
+			setInstructors(await fetchInstructors())
+		}
+		fetchData()
+	}, [])
+
+	const fetchInstructors = async () => {
+		const instructors = await instructorSvc.listInstructors()
+		console.log(instructors)
+		return instructors
+	}
+
+	return (
+		<div>
+			<CourseBuilder instructors={instructors} />
+		</div>
+	)
 }
 
 export default Course
