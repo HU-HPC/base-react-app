@@ -19,11 +19,12 @@ def list_course():
 
 @app.route("/course", methods=["POST"])
 def create_course():
-    ccr = from_request(request)
-    course = Course(ccr.request.get("code"), ccr.request.get("name"), ccr.request.get("instructor_id"))
-    cu = CourseUsecase()
-    id = cu.create(course)
-    return json_response({"course_id": id})
+    print(request.get_json())
+    # ccr = from_request(request)
+    # course = Course(ccr.request.get("code"), ccr.request.get("name"), ccr.request.get("instructor_id"))
+    # cu = CourseUsecase()
+    # id = cu.create(course)
+    # return json_response({"course_id": id})
 
 
 @app.route("/course/<string:id>", methods=["DELETE"])

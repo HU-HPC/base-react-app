@@ -1,13 +1,18 @@
 import React from "react"
 import { Input, FormFeedback } from "reactstrap"
+import InputMask from "react-input-mask"
 
 const TextField = ({ ...props }) => {
-	return (
+	return props.isMasked ? (
+		<>
+			<InputMask {...props} mask={props.mask} maskChar={props.maskChar} />
+		</>
+	) : (
 		<>
 			<Input
 				type={props.textArea ? "textarea" : "text"}
 				onChange={props.handleChange}
-				onBlur={props.handleBlur}
+				onBlur={props.onBlur ? props.onBlur : props.handleBlur}
 				name={props.name}
 				value={props.value}
 				placeholder={props.placeholder}

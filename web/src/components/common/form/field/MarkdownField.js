@@ -1,14 +1,25 @@
-import React from "react"
-import { ReactMarkdown } from "react-markdown"
-import { Card, CardBody } from "reactstrap"
+import React, { useState } from "react"
+import ReactMde from "react-mde"
+import * as Showdown from "showdown"
+import "react-mde/lib/styles/css/react-mde-all.css"
 
-const MarkdownField = ({ source }) => {
+const converter = new Showdown.Converter({
+	tables: true,
+	simplifiedAutoLink: true,
+	strikethrough: true,
+	tasklists: true,
+})
+const MarkdownField = ({ value, setValue }) => {
+	const [selectedTab, setSelectedTab] = useState("write")
+
 	return (
-		<Card>
-			<CardBody>
-				<ReactMarkdown source={source} />
-			</CardBody>
-		</Card>
+		<ReactMde
+			value={value}
+			onChange={setValue}
+			selectedTab={selectedTab}
+			onTabChange={setSelectedTab}
+			generateMarkdownPreview={markdown => Promise.resolve(converter.makeHtml(markdown))}
+		/>
 	)
 }
 

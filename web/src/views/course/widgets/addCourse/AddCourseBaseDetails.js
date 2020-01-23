@@ -5,6 +5,7 @@ import { Row, Col, CardBody, Form } from "reactstrap"
 import { Formik } from "formik"
 import { SelectField } from "components/common/form"
 import { FormField, TextField } from "components/common/form"
+import InputMask from "react-input-mask"
 
 const SCHEMA = Yup.object().shape({
 	instructorId: Yup.number()
@@ -72,8 +73,7 @@ const DAY_OF_WEEK = [
 	{ id: 6, name: "Saturday" },
 ]
 
-const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
-	console.log(instructors)
+const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }) => {
 	return (
 		<Formik validationSchema={schema} onSubmit={onSubmit} initialValues={defaults}>
 			{props => (
@@ -90,6 +90,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 										items={instructors}
 										labelBy={item => item.first_name + " " + item.last_name}
 										valueBy={item => item.id}
+										onSelect={item => handleChange({ instructorId: item.value })}
 									/>
 								}
 							/>
@@ -105,6 +106,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 										items={LOCATIONS}
 										labelBy={item => item.name}
 										valueBy={item => item.id}
+										onSelect={item => handleChange({ meetingLocationId: item.value })}
 									/>
 								}
 							/>
@@ -120,6 +122,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 										items={SEMESTERS}
 										labelBy={item => item.name}
 										valueBy={item => item.id}
+										onSelect={item => handleChange({ semesterId: item.value })}
 									/>
 								}
 							/>
@@ -135,6 +138,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 										items={DAY_OF_WEEK}
 										valueBy={item => item.id}
 										labelBy={item => item.name}
+										// onSelect={item => handleChange({ dayOfWeek: item.value })}
 										isMulti
 									/>
 								}
@@ -144,21 +148,45 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 							<FormField
 								name="startTime"
 								label="Start Time"
-								target={<TextField {...props} name="startTime" style={{ display: "inline" }} />}
+								target={
+									<TextField
+										{...props}
+										name="startTime"
+										isMasked
+										mask="99:99"
+										maskChar="-"
+										onBlur={item => handleChange({ startTime: item.target.value })}
+									/>
+								}
 							/>
 						</Col>
 						<Col>
 							<FormField
 								name="endTime"
 								label="End Time"
-								target={<TextField {...props} name="endTime" />}
+								target={
+									<TextField
+										{...props}
+										maskChar="-"
+										isMasked
+										mask="99:99"
+										name="endTime"
+										onBlur={item => handleChange({ endTime: item.target.value })}
+									/>
+								}
 							/>
 						</Col>
 						<Col>
 							<FormField
 								name="roomNumber"
 								label="Room Number"
-								target={<TextField {...props} name="roomNumber" />}
+								target={
+									<TextField
+										{...props}
+										name="roomNumber"
+										onBlur={item => handleChange({ roomNumber: item.target.value })}
+									/>
+								}
 							/>
 						</Col>
 					</Form>
@@ -168,7 +196,11 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors }) => {
 	)
 }
 
-const AddCourseBaseDetails = ({ instructors }) => {
+const AddCourseBaseDetails = ({ instructors, updateCourse }) => {
+	const handleChange = value => {
+		updateCourse(value)
+	}
+
 	return (
 		<CardBody>
 			<AddCourseForm
@@ -176,6 +208,7 @@ const AddCourseBaseDetails = ({ instructors }) => {
 				schema={SCHEMA}
 				onSubmit={values => console.log(values)}
 				instructors={instructors}
+				handleChange={handleChange}
 			/>
 		</CardBody>
 	)

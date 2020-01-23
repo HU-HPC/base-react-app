@@ -13,20 +13,24 @@ const DEFAULTS = {
 	code: "CISC ",
 }
 
-const CreateCourseHeadForm = ({ schema, defaults, onSubmit }) => {
+const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid }) => {
 	return (
 		<Row className="justify-content-between">
 			<Col>
 				<Formik validationSchema={schema} initialValues={defaults} onSubmit={onSubmit}>
 					{props => (
 						<Form onSubmit={props.handleSubmit} style={{ width: "100%" }}>
-							<FormField label="Course Code" name="code" target={<TextField {...props} name="code" />} />
+							<FormField
+								label="Course Code"
+								name="code"
+								target={<TextField {...props} name="code" blur />}
+							/>
 						</Form>
 					)}
 				</Formik>
 			</Col>
 			<Col sm={{ offset: 1 }}>
-				<Button disabled color="success" className="mt-4 mr-5" size="lg">
+				<Button disabled={!valid} color="success" className="mt-4 mr-5" size="lg">
 					Submit
 				</Button>
 			</Col>
@@ -34,10 +38,20 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit }) => {
 	)
 }
 
-const CreateCourseHead = () => {
+const CreateCourseHead = ({ updateCourse, validCourse }) => {
+	const handleSubmit = value => {
+		console.log(value)
+		updateCourse("code", value["code"])
+	}
+
 	return (
 		<CardHeader>
-			<CreateCourseHeadForm schema={SCHEMA} defaults={DEFAULTS} onSubmit={values => console.log(values)} />
+			<CreateCourseHeadForm
+				schema={SCHEMA}
+				defaults={DEFAULTS}
+				onSubmit={values => handleSubmit(values)}
+				valid={validCourse}
+			/>
 		</CardHeader>
 	)
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 
 import Select from "react-select"
 
-function SelectField({ items, labelBy, valueBy, selectedItem, onSelect, isMulti }) {
+function SelectField({ items, labelBy, valueBy, selectedItem, onSelect, isMulti, style }) {
 	const [_items, set_items] = useState(items)
 	const [selected, setSelected] = useState(null)
 	useEffect(() => {

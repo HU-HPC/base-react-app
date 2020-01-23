@@ -1,35 +1,29 @@
-import React from "react"
-import * as Yup from "yup"
-import { Card, CardBody, CardHeader, Form } from "reactstrap"
-import { Formik } from "formik"
-import { FormField, TextField } from "components/common/form"
+import React, { useState } from "react"
+import { Card, CardBody, CardHeader } from "reactstrap"
+import { DynamicTable } from "components/common/form"
 
-const SCHEMA = Yup.object().shape({
-	topics: Yup.array(),
-})
-
-const DEFAULTS = {
-	topics: [],
-}
-
-const TopicsForm = ({ schema, defaults, onSubmit }) => {
-	return (
-		<Formik validationSchema={schema} onSubmit={onSubmit} initialValues={defaults}>
-			{props => (
-				<Form onSubmit={props.handleSubmit} style={{ width: "100%" }}>
-					<FormField name="topics" target={<TextField {...props} name="topics" textArea />} />
-				</Form>
-			)}
-		</Formik>
-	)
-}
+const FIELDS = ["ID", "SUBJECT", "FOO", "BAR"]
 
 const Topics = () => {
+	const [data, setData] = useState([])
+
+	const updateData = (field, value) => {
+		const _data = data
+		_data[field] = value
+		setData(_data)
+	}
+
+	const addRow = rowData => {
+		const _data = data
+		_data.push(rowData)
+		setData(_data)
+	}
+
 	return (
 		<Card>
 			<CardHeader>Topics</CardHeader>
 			<CardBody>
-				<TopicsForm schema={SCHEMA} onSubmit={values => console.log(values)} defaults={DEFAULTS} />
+				<DynamicTable fields={FIELDS} data={data} updateData={updateData} addRow={addRow} />
 			</CardBody>
 		</Card>
 	)
