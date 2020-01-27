@@ -1,17 +1,16 @@
 import React, { useState } from "react"
-import { Table } from "reactstrap"
+import { Table, Button, Input } from "reactstrap"
 import TextField from "./field/TextField"
 
-const DynamicTable = ({ fields, data, updateData, addRow }) => {
-	console.log(fields)
-
+const DynamicTable = ({ fields, data, addRow }) => {
 	const [fullRow, setFullRow] = useState(false)
 	const [newRowData, setNewRowData] = useState({})
 
-	const saveData = (name, data) => {
-		const _newRowData = newRow
-		_newRowData[name] = data
-		setNewRowData(_newRowData)
+	const saveData = event => {
+		console.log(event.target.name)
+		// const _newRowData = newRow
+		// _newRowData[name] = data
+		// setNewRowData(_newRowData)
 	}
 
 	const resetNewRowData = () => {
@@ -24,6 +23,7 @@ const DynamicTable = ({ fields, data, updateData, addRow }) => {
 				{fields.map(header => (
 					<th>{header}</th>
 				))}
+				<th />
 			</thead>
 		)
 	}
@@ -36,17 +36,31 @@ const DynamicTable = ({ fields, data, updateData, addRow }) => {
 		))
 	}
 
+	const _addRow = () => {
+		console.log(newRowData)
+	}
+
 	const newRow = () => {
 		return (
 			<tr>
-				{fields.map((item, idx) => (
-					<td>
-						<TextField
-							name={item.name}
-							onChange={value => updateData(value.target.name, value.target.value)}
-						/>
-					</td>
-				))}
+				{fields.map((item, idx) => {
+					console.log(item, idx)
+					return (
+						<td>
+							<Input
+								name={item.name}
+								onBlur={event => {
+									saveData(event)
+								}}
+							/>
+						</td>
+					)
+				})}
+				<td>
+					<Button color="success" onClick={() => _addRow(newRowData)}>
+						<i className="fa fa-check" />
+					</Button>
+				</td>
 			</tr>
 		)
 	}
