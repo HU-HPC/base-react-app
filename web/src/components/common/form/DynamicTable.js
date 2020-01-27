@@ -1,16 +1,15 @@
 import React, { useState } from "react"
 import { Table, Button, Input } from "reactstrap"
-import TextField from "./field/TextField"
 
 const DynamicTable = ({ fields, data, addRow }) => {
-	const [fullRow, setFullRow] = useState(false)
 	const [newRowData, setNewRowData] = useState({})
+	const [valid, setValid] = useState(false)
 
-	const saveData = event => {
-		console.log(event.target.name)
-		// const _newRowData = newRow
-		// _newRowData[name] = data
-		// setNewRowData(_newRowData)
+	const saveData = ({ target }) => {
+		const _newRowData = newRowData
+		_newRowData[target.name] = target.value
+		setNewRowData(_newRowData)
+		validRow()
 	}
 
 	const resetNewRowData = () => {
@@ -31,40 +30,46 @@ const DynamicTable = ({ fields, data, addRow }) => {
 	const createRows = () => {
 		return data.map(item => (
 			<tr>
-				<td>{item.data}</td>
+				{Object.keys(item).map(field => (
+					<td>{item[field]}</td>
+				))}
+				<td />
 			</tr>
 		))
 	}
 
-	const _addRow = () => {
-		console.log(newRowData)
+	const validRow = () => {
+		const keys = Object.keys(newRowData)
+		console.log(keys, fields.length)
+		setValid(fields.length === keys.length)
+	}
+
+	const handleNewRowSubmit = () => {
+		if (Object.keys(newRowData).length) {
+			addRow(newRowData)
+			resetNewRowData()
+			setValid(false)
+		}
 	}
 
 	const newRow = () => {
 		return (
 			<tr>
-				{fields.map((item, idx) => {
-					console.log(item, idx)
+				{fields.map(item => {
 					return (
 						<td>
-							<Input
-								name={item.name}
-								onBlur={event => {
-									saveData(event)
-								}}
-							/>
+							<Input name={item} onBlur={event => saveData(event)} value={newRowData[item]} />
 						</td>
 					)
 				})}
 				<td>
-					<Button color="success" onClick={() => _addRow(newRowData)}>
+					<Button color="success" onClick={handleNewRowSubmit} disabled={!valid}>
 						<i className="fa fa-check" />
 					</Button>
 				</td>
 			</tr>
 		)
 	}
-
 	return (
 		<Table>
 			{createHeader()}

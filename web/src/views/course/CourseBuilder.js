@@ -29,10 +29,6 @@ function CourseBuilder({ instructors }) {
 		return courseSvc(course)
 	}
 
-	useEffect(() => {
-		console.log(course)
-	}, [course])
-
 	return (
 		<>
 			<Card>

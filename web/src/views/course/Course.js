@@ -16,7 +16,6 @@ const Course = () => {
 
 	const fetchInstructors = async () => {
 		const instructors = await instructorSvc.listInstructors()
-		console.log(instructors)
 		return instructors
 	}
 

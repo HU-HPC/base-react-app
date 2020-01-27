@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Card, CardBody, CardHeader } from "reactstrap"
 import { DynamicTable } from "components/common/form"
 
-const FIELDS = ["ID", "SUBJECT", "FOO", "BAR"]
+const FIELDS = ["Id", "Subject", "Description", "Duration"]
 
 const Topics = () => {
 	const [data, setData] = useState([])
@@ -11,7 +11,6 @@ const Topics = () => {
 		const _data = data
 		_data.push(rowData)
 		setData(_data)
-		console.log(data)
 	}
 
 	return (

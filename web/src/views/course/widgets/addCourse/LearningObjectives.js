@@ -1,36 +1,23 @@
-import React from "react"
-import * as Yup from "yup"
-import ValidationMessage from "service/validation/ValidationMessage"
-import { Card, Form, CardHeader, CardBody } from "reactstrap"
-import { Formik } from "formik"
-import { FormField, TextField } from "components/common/form"
+import React, { useState } from "react"
 
-const SCHEMA = Yup.object().shape({
-	clos: Yup.array().required(ValidationMessage.required),
-})
+import { Card, CardHeader, CardBody } from "reactstrap"
+import DynamicTable from "components/common/form/DynamicTable"
 
-const DEFAULTS = {
-	clos: "",
-}
-
-const LearningObjectivesForm = ({ schema, defaults, onSubmit }) => {
-	return (
-		<Formik validationSchema={schema} onSubmit={onSubmit} initialValues={defaults}>
-			{props => (
-				<Form onSubmit={props.handleSubmit} style={{ width: "100%" }}>
-					<FormField name="clos" target={<TextField textArea name="clos" {...props} />} />
-				</Form>
-			)}
-		</Formik>
-	)
-}
+const FIELDS = ["Code", "Title"]
 
 const LearningObjectives = () => {
+	const [data, setData] = useState([])
+
+	const addRow = rowData => {
+		const _data = data
+		_data.push(rowData)
+		setData(_data)
+	}
 	return (
 		<Card>
 			<CardHeader>Course Learning Outcomes</CardHeader>
 			<CardBody>
-				<LearningObjectivesForm schema={SCHEMA} defaults={DEFAULTS} onSubmit={values => console.log(values)} />
+				<DynamicTable fields={FIELDS} addRow={addRow} data={data} />
 			</CardBody>
 		</Card>
 	)

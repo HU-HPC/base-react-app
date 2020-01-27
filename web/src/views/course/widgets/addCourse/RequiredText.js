@@ -1,35 +1,23 @@
-import React from "react"
-import * as Yup from "yup"
-import { Card, Form, CardHeader, CardBody } from "reactstrap"
-import { Formik } from "formik"
-import { FormField, TextField } from "components/common/form"
+import React, { useState } from "react"
 
-const SCHEMA = Yup.object().shape({
-	requiredTexts: Yup.array(),
-})
+import { Card, CardHeader, CardBody } from "reactstrap"
+import DynamicTable from "components/common/form/DynamicTable"
 
-const DEFAULTS = {
-	requiredTexts: [],
-}
-
-const RequiredTextForm = ({ schema, defaults, onSubmit }) => {
-	return (
-		<Formik validationSchema={schema} onSubmit={onSubmit} initialValues={defaults}>
-			{props => (
-				<Form onSubmit={props.handleSubmit} style={{ width: "100%" }}>
-					<FormField name="requiredTexts" target={<TextField textArea name="requiredTexts" {...props} />} />
-				</Form>
-			)}
-		</Formik>
-	)
-}
+const FIELDS = ["ISBN", "Title", "Edition", "Author"]
 
 const RequiredText = () => {
+	const [data, setData] = useState([])
+
+	const addRow = rowData => {
+		const _data = data
+		_data.push(rowData)
+		setData(_data)
+	}
 	return (
 		<Card>
 			<CardHeader>Required Textbooks and References</CardHeader>
 			<CardBody>
-				<RequiredTextForm schema={SCHEMA} defaults={DEFAULTS} onSubmit={values => console.log(values)} />
+				<DynamicTable fields={FIELDS} data={data} addRow={addRow} />
 			</CardBody>
 		</Card>
 	)

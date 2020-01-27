@@ -147,7 +147,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 						<Col>
 							<FormField
 								name="startTime"
-								label="Start Time"
+								label="Start Time "
 								target={
 									<TextField
 										{...props}
@@ -163,7 +163,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 						<Col>
 							<FormField
 								name="endTime"
-								label="End Time"
+								label="End Time "
 								target={
 									<TextField
 										{...props}
