@@ -6,14 +6,19 @@ const CourseDescription = ({ updateCourse, courseDescription }) => {
 	const [value, setValue] = useState(courseDescription)
 
 	useEffect(() => {
-		updateCourse("courseDescription", value)
+		console.log(value)
+		updateCourse("description", value)
 	}, [value])
+
+	const _setValue = val => {
+		setValue(val)
+	}
 
 	return (
 		<Card>
 			<CardHeader>Course Description</CardHeader>
 			<CardBody>
-				<MarkdownField value={value} setValue={setValue} />
+				<MarkdownField value={value} setValue={_setValue} />
 			</CardBody>
 		</Card>
 	)

@@ -138,7 +138,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 										items={DAY_OF_WEEK}
 										valueBy={item => item.id}
 										labelBy={item => item.name}
-										// onSelect={item => handleChange({ dayOfWeek: item.value })}
+										onSelect={item => handleChange({ dayOfWeek: item.value })}
 										isMulti
 									/>
 								}

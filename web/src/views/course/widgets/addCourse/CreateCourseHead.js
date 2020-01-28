@@ -13,9 +13,10 @@ const DEFAULTS = {
 	code: "CISC ",
 }
 
-const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid }) => {
+const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid, submitCourse }) => {
+	console.log(valid)
 	return (
-		<Row className="justify-content-between">
+		<Row>
 			<Col>
 				<Formik validationSchema={schema} initialValues={defaults} onSubmit={onSubmit}>
 					{props => (
@@ -30,7 +31,7 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid }) => {
 				</Formik>
 			</Col>
 			<Col sm={{ offset: 1 }}>
-				<Button disabled={!valid} color="success" className="mt-4 mr-5" size="lg">
+				<Button disabled={!valid} color="success" className="mt-4 mr-5" size="lg" onClick={submitCourse}>
 					Submit
 				</Button>
 			</Col>
@@ -38,7 +39,7 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid }) => {
 	)
 }
 
-const CreateCourseHead = ({ updateCourse, validCourse }) => {
+const CreateCourseHead = ({ updateCourse, validCourse, submitCourse }) => {
 	const handleSubmit = value => {
 		console.log(value)
 		updateCourse("code", value["code"])
@@ -51,6 +52,7 @@ const CreateCourseHead = ({ updateCourse, validCourse }) => {
 				defaults={DEFAULTS}
 				onSubmit={values => handleSubmit(values)}
 				valid={validCourse}
+				submitCourse={submitCourse}
 			/>
 		</CardHeader>
 	)

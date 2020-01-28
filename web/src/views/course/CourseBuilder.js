@@ -9,39 +9,46 @@ import CourseAssessment from "./widgets/addCourse/CourseAssessment"
 import LearningObjectives from "./widgets/addCourse/LearningObjectives"
 import RequiredText from "./widgets/addCourse/RequiredText"
 import Topics from "./widgets/addCourse/Topics"
-import CourseService from "../../service/CourseService"
+import CourseService from "service/CourseService"
+import Course from "./model/Course"
 
 function CourseBuilder({ instructors }) {
-	const [course, setCourse] = useState({})
+	const [course, setCourse] = useState(new Course())
 	const courseSvc = new CourseService()
 
 	const updateCourse = (field, value) => {
 		const _course = course
 		_course[field] = value
 		setCourse(_course)
-	}
-
-	const updateCourseBulk = values => {
-		Object.keys(values).map(key => updateCourse(key, values[key]))
+		console.log(course)
 	}
 
 	const submitCourse = () => {
 		return courseSvc(course)
 	}
 
+	useEffect(() => {
+		console.log(course)
+	}, [course])
+
+	console.log(course)
 	return (
 		<>
 			<Card>
-				<CreateCourseHead updateCourse={updateCourseBulk} submitCourse={submitCourse} validCourse={false} />
-				<AddCourseBaseDetails instructors={instructors} updateCourse={updateCourseBulk} />
+				<CreateCourseHead
+					updateCourse={updateCourse}
+					submitCourse={submitCourse}
+					validCourse={course.isValid}
+				/>
+				<AddCourseBaseDetails instructors={instructors} updateCourse={updateCourse} />
 			</Card>
 			<CourseDescription updateCourse={updateCourse} courseDescription={course.description} />
-			<Topics updateCourse={updateCourseBulk} />
-			<CoursePrerequesites updateCourse={updateCourseBulk} />
-			<ExpectedKnowledge updateCourse={updateCourseBulk} />
-			<CourseAssessment updateCourse={updateCourseBulk} />
-			<LearningObjectives updateCourse={updateCourseBulk} />
-			<RequiredText updateCourse={updateCourseBulk} />
+			<Topics updateCourse={updateCourse} />
+			<CoursePrerequesites updateCourse={updateCourse} />
+			<ExpectedKnowledge updateCourse={updateCourse} />
+			<CourseAssessment updateCourse={updateCourse} />
+			<LearningObjectives updateCourse={updateCourse} />
+			<RequiredText updateCourse={updateCourse} />
 		</>
 	)
 }
