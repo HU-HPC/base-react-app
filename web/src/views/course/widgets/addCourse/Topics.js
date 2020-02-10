@@ -4,13 +4,14 @@ import { DynamicTable } from "components/common/form"
 
 const FIELDS = ["Id", "Subject", "Description", "Duration"]
 
-const Topics = () => {
+const Topics = ({ updateCourse }) => {
 	const [data, setData] = useState([])
 
 	const addRow = rowData => {
 		const _data = data
 		_data.push(rowData)
 		setData(_data)
+		updateCourse("topics", _data)
 	}
 
 	return (

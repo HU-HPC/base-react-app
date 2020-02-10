@@ -3,7 +3,7 @@ class Course {
 	instructorId = 0
 	location = ""
 	semester = ""
-	daysOfWeek = []
+	dayOfWeek = []
 	startTime = ""
 	endTime = ""
 	roomNumber = ""
@@ -11,7 +11,7 @@ class Course {
 	topics = []
 	prerequisites = []
 	expectedKnowledge = []
-	assessment = []
+	assessment = ""
 	learningObjectives = []
 	requiredText = []
 
@@ -24,6 +24,7 @@ class Course {
 	}
 	//&& this.instructorId && this.description && this.location && this.semester
 	get isValid() {
+		console.log(this.code)
 		if (this.code) {
 			return true
 		}

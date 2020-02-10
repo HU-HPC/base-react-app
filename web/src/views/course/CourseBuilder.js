@@ -14,6 +14,7 @@ import Course from "./model/Course"
 
 function CourseBuilder({ instructors }) {
 	const [course, setCourse] = useState(new Course())
+	const [isValid, setIsValid] = useState(false)
 	const courseSvc = new CourseService()
 
 	const updateCourse = (field, value) => {
@@ -29,20 +30,16 @@ function CourseBuilder({ instructors }) {
 
 	useEffect(() => {
 		console.log(course)
-	}, [course])
+		setIsValid(course.isValid)
+	}, [course.code])
 
-	console.log(course)
 	return (
 		<>
 			<Card>
-				<CreateCourseHead
-					updateCourse={updateCourse}
-					submitCourse={submitCourse}
-					validCourse={course.isValid}
-				/>
+				<CreateCourseHead updateCourse={updateCourse} submitCourse={submitCourse} validCourse={isValid} />
 				<AddCourseBaseDetails instructors={instructors} updateCourse={updateCourse} />
 			</Card>
-			<CourseDescription updateCourse={updateCourse} courseDescription={course.description} />
+			<CourseDescription updateCourse={updateCourse} description={course.description} />
 			<Topics updateCourse={updateCourse} />
 			<CoursePrerequesites updateCourse={updateCourse} />
 			<ExpectedKnowledge updateCourse={updateCourse} />

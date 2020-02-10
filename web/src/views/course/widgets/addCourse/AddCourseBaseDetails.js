@@ -5,7 +5,6 @@ import { Row, Col, CardBody, Form } from "reactstrap"
 import { Formik } from "formik"
 import { SelectField } from "components/common/form"
 import { FormField, TextField } from "components/common/form"
-import InputMask from "react-input-mask"
 
 const SCHEMA = Yup.object().shape({
 	instructorId: Yup.number()
@@ -97,23 +96,23 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 						</Col>
 						<Col>
 							<FormField
-								name="meetingLocationId"
+								name="location"
 								label="Location"
 								target={
 									<SelectField
 										{...props}
-										name="meetingLocationId"
+										name="location"
 										items={LOCATIONS}
 										labelBy={item => item.name}
 										valueBy={item => item.id}
-										onSelect={item => handleChange({ meetingLocationId: item.value })}
+										onSelect={item => handleChange({ location: item.value })}
 									/>
 								}
 							/>
 						</Col>
 						<Col>
 							<FormField
-								name="semesterId"
+								name="semester"
 								label="Semester"
 								target={
 									<SelectField
@@ -122,7 +121,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 										items={SEMESTERS}
 										labelBy={item => item.name}
 										valueBy={item => item.id}
-										onSelect={item => handleChange({ semesterId: item.value })}
+										onSelect={item => handleChange({ semester: item.value })}
 									/>
 								}
 							/>
@@ -138,7 +137,7 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 										items={DAY_OF_WEEK}
 										valueBy={item => item.id}
 										labelBy={item => item.name}
-										onSelect={item => handleChange({ dayOfWeek: item.value })}
+										onSelect={item => handleChange({ dayOfWeek: item })}
 										isMulti
 									/>
 								}
@@ -167,10 +166,10 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 								target={
 									<TextField
 										{...props}
-										maskChar="-"
+										name="endTime"
 										isMasked
 										mask="99:99"
-										name="endTime"
+										maskChar="-"
 										onBlur={item => handleChange({ endTime: item.target.value })}
 									/>
 								}
@@ -198,7 +197,8 @@ const AddCourseForm = ({ schema, defaults, onSubmit, instructors, handleChange }
 
 const AddCourseBaseDetails = ({ instructors, updateCourse }) => {
 	const handleChange = value => {
-		updateCourse(value)
+		const vals = Object.entries(value)
+		updateCourse(vals[0][0], vals[0][1])
 	}
 
 	return (

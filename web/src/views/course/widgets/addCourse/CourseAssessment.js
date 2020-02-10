@@ -6,7 +6,7 @@ const CourseAssessment = ({ courseDescription, updateCourse }) => {
 	const [value, setValue] = useState(courseDescription)
 
 	useEffect(() => {
-		updateCourse("courseDescription", value)
+		updateCourse("assessment", value)
 	}, [value])
 
 	return (

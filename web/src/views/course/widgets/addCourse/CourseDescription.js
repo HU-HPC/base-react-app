@@ -2,23 +2,18 @@ import React, { useEffect, useState } from "react"
 import { Card, CardHeader, CardBody } from "reactstrap"
 import { MarkdownField } from "components/common/form"
 
-const CourseDescription = ({ updateCourse, courseDescription }) => {
-	const [value, setValue] = useState(courseDescription)
+const CourseDescription = ({ updateCourse, description }) => {
+	const [value, setValue] = useState(description)
 
 	useEffect(() => {
-		console.log(value)
 		updateCourse("description", value)
 	}, [value])
-
-	const _setValue = val => {
-		setValue(val)
-	}
 
 	return (
 		<Card>
 			<CardHeader>Course Description</CardHeader>
 			<CardBody>
-				<MarkdownField value={value} setValue={_setValue} />
+				<MarkdownField value={value} setValue={setValue} />
 			</CardBody>
 		</Card>
 	)

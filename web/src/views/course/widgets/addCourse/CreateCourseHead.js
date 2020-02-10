@@ -14,7 +14,6 @@ const DEFAULTS = {
 }
 
 const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid, submitCourse }) => {
-	console.log(valid)
 	return (
 		<Row>
 			<Col>
@@ -24,7 +23,7 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid, submitCourse 
 							<FormField
 								label="Course Code"
 								name="code"
-								target={<TextField {...props} name="code" blur />}
+								target={<TextField {...props} name="code" onBlur={props.handleSubmit} />}
 							/>
 						</Form>
 					)}
@@ -41,16 +40,17 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid, submitCourse 
 
 const CreateCourseHead = ({ updateCourse, validCourse, submitCourse }) => {
 	const handleSubmit = value => {
-		console.log(value)
 		updateCourse("code", value["code"])
 	}
+
+	console.log(validCourse)
 
 	return (
 		<CardHeader>
 			<CreateCourseHeadForm
 				schema={SCHEMA}
 				defaults={DEFAULTS}
-				onSubmit={values => handleSubmit(values)}
+				onSubmit={handleSubmit}
 				valid={validCourse}
 				submitCourse={submitCourse}
 			/>
