@@ -25,7 +25,8 @@ function CourseBuilder({ instructors }) {
 	}
 
 	const submitCourse = () => {
-		return courseSvc(course)
+		console.log(course)
+		courseSvc.createCourse(course)
 	}
 
 	useEffect(() => {

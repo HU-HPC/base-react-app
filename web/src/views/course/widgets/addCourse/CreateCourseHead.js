@@ -30,7 +30,13 @@ const CreateCourseHeadForm = ({ schema, defaults, onSubmit, valid, submitCourse 
 				</Formik>
 			</Col>
 			<Col sm={{ offset: 1 }}>
-				<Button disabled={!valid} color="success" className="mt-4 mr-5" size="lg" onClick={submitCourse}>
+				<Button
+					disabled={!valid && false}
+					color="success"
+					className="mt-4 mr-5"
+					size="lg"
+					onClick={submitCourse}
+				>
 					Submit
 				</Button>
 			</Col>

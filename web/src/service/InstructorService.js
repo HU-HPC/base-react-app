@@ -2,7 +2,7 @@ import axios from "axios"
 import InstructorModel from "model/InstructorModel"
 import mockFaculty from "resource/data/mock_data/FacultyListPayload"
 
-const BASE = "instructor"
+const BASE = "/instructor"
 
 class InstructorService {
 	constructor(mock) {

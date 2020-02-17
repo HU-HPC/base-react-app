@@ -1,1 +1,1 @@
-from .course import Course
+from .course import Course, from_request_object

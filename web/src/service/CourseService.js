@@ -1,15 +1,18 @@
-import API from "./API"
+import axios from "axios"
+
+const BASE = "/course"
 
 class CourseService {
-    listInstructors = () => {
-        const response = API.get("/course")
-        return response.data
-    }
+	listCourse = () => {
+		const response = axios.get(BASE)
+		return response.data
+	}
 
-    createInstructor = request => {
-        const response = API.post("/course", request)
-        return response.data
-    }
+	createCourse = request => {
+		console.log(request)
+		const response = axios.post(BASE, request)
+		return response.data
+	}
 }
 
 export default CourseService

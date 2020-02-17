@@ -100,3 +100,17 @@ create table class(
     foreign key (semester_id) references semester (id),
     foreign key (instructor_id) references instructor (id)
 );
+
+-- Student
+-- Id
+-- FName
+-- Lname
+-- Current Classes
+-- Past Classes
+-- Research Interests
+-- Advisor
+-- Concentration
+-- Prior Programming Skills
+-- Current Job
+-- Profile Picture
+--
