@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { Card, CardHeader, CardBody, Button } from "reactstrap"
-import FacultyContext from "./FacultyContext"
+import FacultyContext from "../../helper/FacultyContext"
 
 const InstructorCard = ({ instructor }) => {
 	const facultyActions = useContext(FacultyContext)

@@ -1,6 +1,6 @@
 import React from "react"
 
-const Faculty = React.lazy(() => import("./views/faculty/Faculty"))
+const Faculty = React.lazy(() => import("./components/domain/faculty/view/Faculty"))
 const ResearchThesis = React.lazy(() => import("./views/research/Thesis"))
 const ResearchProject = React.lazy(() => import("./views/research/Project"))
 const ProgramObjective = React.lazy(() => import("./views/program/ProgramObjective"))

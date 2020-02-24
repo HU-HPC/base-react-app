@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Container, Button, Row, Col } from "reactstrap"
-import FacultyListGroup from "./FacultyListGroup"
+import FacultyListGroup from "../widget/FacultyListGroup"
 import BaseModal from "components/common/modal/BaseModal"
-import CreateInstructor from "views/faculty/CreateInstructor"
-import FacultyContext from "./FacultyContext"
+import CreateInstructor from "components/domain/faculty/widget/instructor/CreateInstructor"
+import FacultyContext from "../helper/FacultyContext"
 import InstructorService from "service/InstructorService"
 
 const Faculty = () => {

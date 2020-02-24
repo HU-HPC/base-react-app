@@ -1,6 +1,6 @@
 import React from "react"
 import { Row, Col } from "reactstrap"
-import InstructorCard from "./InstructorCard"
+import InstructorCard from "./instructor/InstructorCard"
 
 const FacultyListGroup = ({ instructors }) => {
 	const generateItems = () => {
