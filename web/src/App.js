@@ -1,23 +1,28 @@
-import React from "react"
-import { Router } from "@reach/router"
-import CustomComponent from "./components/CustomComponent"
-import Footer from "./components/chrome/footer/Footer"
-import CovertComponentPlaygound from "./components/sandbox/zCovert/CovertComponentPlaygound"
-import Header from "./components/chrome/header/Header"
-import { Container } from "reactstrap"
-const App = () => {
-	return (
-		<>
-			<Header />
-			<Container>
-				<Router>
-					<CustomComponent path="/" />
-					<CovertComponentPlaygound path="/covert" />
-				</Router>
-			</Container>
-			<Footer />
-		</>
-	)
+import React, {Component} from "react"
+import {HashRouter, Route, Switch} from "react-router-dom"
+// import { library } from "font-awesome";
+// import { faPortrait } from "font-awesome"
+import "./App.scss"
+
+// library.add(faPortrait);
+
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>
+
+// Containers
+const DefaultLayout = React.lazy(() => import("./containers/DefaultLayout"))
+
+class App extends Component {
+    render() {
+        return (
+            <HashRouter>
+                <React.Suspense fallback={loading()}>
+                    <Switch>
+                        <Route path="/" name="Home" render={props => <DefaultLayout {...props} />} />
+                    </Switch>
+                </React.Suspense>
+            </HashRouter>
+        )
+    }
 }
 
 export default App
