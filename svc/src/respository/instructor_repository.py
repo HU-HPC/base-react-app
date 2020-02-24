@@ -17,7 +17,8 @@ class InstructorPostgresRepository(object):
     def create_instructor(self, instructor):
         query = db.insert(self.instructor_table).values(first_name=instructor.first_name,
                                                         last_name=instructor.last_name, email=instructor.email)
-        connection.execute(query)
+        result_instructor = connection.execute(query)
+        return result_instructor.inserted_primary_key[0]
 
     def delete_instructor(self, id):
         query = self.instructor_table.update().where(self.instructor_table.columns.id == id).values(deleted=True)
@@ -39,7 +40,13 @@ class InstructorPostgresRepository(object):
         # query = db.select([self.instructor_table]).where(db.and_(self.instructor_table.columns.deleted is False, self.instructor_table.columns.id == id))
         query = db.select([self.instructor_table]).where(db.and_(self.instructor_table.columns.deleted == False,
                                                                  self.instructor_table.columns.id == id))
-        print(query)
+        ResultProxy = connection.execute(query)
+        ResultSet = ResultProxy.fetchall()
+        return ResultSet
+
+    def get_instructor_by_faculty_id(self, faculty_id):
+        query = db.select([self.instructor_table]).where(db.and_(self.instructor_table.columns.deleted == False,
+                                                                 self.instructor_table.columns.faculty_id == faculty_id))
         ResultProxy = connection.execute(query)
         ResultSet = ResultProxy.fetchall()
         return ResultSet

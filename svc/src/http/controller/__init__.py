@@ -6,3 +6,4 @@ def json_response(payload, status=200):
 
 from .instructor import *
 from .course import *
+from .research import *

@@ -10,3 +10,4 @@ db_name = 'postgres'
 
 from .instructor_repository import *
 from .course_repository import *
+from .research_repository import *

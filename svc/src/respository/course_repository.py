@@ -22,9 +22,8 @@ class CoursePostgresRepository(object):
             expected_knowledge=c.expected_knowledge, assessment=c.assessment, learning_objective=c.learning_objective,
             required_text=c.required_text
         )
-        course_semester_pi_query = ()
         result_course = connection.execute(course_query)
-        return result.inserted_primary_key[0]
+        return result_course.inserted_primary_key[0]
 
     def delete_course(self, id):
         query = self.course_table.update().where(self.course_table.columns.id == id).values(deleted=True)
