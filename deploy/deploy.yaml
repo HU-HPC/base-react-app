@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pap
+  labels:
+    app: pap
+  namespace: pap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pap
+  template:
+    metadata:
+      labels:
+        app: pap
+    spec:
+      containers:
+      - name: pap
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: pipeline-docker-registry
