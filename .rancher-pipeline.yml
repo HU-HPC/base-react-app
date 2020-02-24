@@ -5,17 +5,18 @@ stages:
       branch: master
       event: [ push, pull_request ]
     steps:
-    image: node:13
-    - runScriptConfig: |-
-        PACKAGE_VERSION=$(cat package-lock.json \
-          | grep version \
-          | head -1 \
-          | awk -F: '{ print $2 }' \
-          | sed 's/[", ]//g')
-        echo "Building PAP $PACKAGE_VERSION"
-        npm install -g @angular/cli
-        npm install
-        ng build --aot
+    - runScriptConfig: 
+        image: node:13
+        shellScript: |-
+          PACKAGE_VERSION=$(cat package.json \
+            | grep version \
+            | head -1 \
+            | awk -F: '{ print $2 }' \
+            | sed 's/[", ]//g')
+          echo "Building PAP $PACKAGE_VERSION"
+          npm install -g @angular/cli
+          npm install
+          ng build --aot
   - name: Publish
     steps:
     - publishImageConfig:
