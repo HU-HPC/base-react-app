@@ -5,6 +5,7 @@ stages:
       branch: master
       event: [ push, pull_request ]
     steps:
+    image: node:13
     - runScriptConfig: |-
         PACKAGE_VERSION=$(cat package-lock.json \
           | grep version \
