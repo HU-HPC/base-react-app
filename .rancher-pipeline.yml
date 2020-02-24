@@ -1,0 +1,29 @@
+# Main Pipeline
+stages:
+  - name: Build 
+    when:
+      branch: master
+      event: [ push, pull_request ]
+    steps:
+    - runScriptConfig: |-
+        PACKAGE_VERSION=$(cat package-lock.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[", ]//g')
+        echo "Building PAP $PACKAGE_VERSION"
+        npm install -g @angular/cli
+        npm install
+        ng build --aot
+  - name: Publish
+    steps:
+    - publishImageConfig:
+        dockerfilePath: ./Dockerfile
+        buildContext: .
+        tag: pap:${CICD_EXECUTION_SEQUENCE}
+  - name: Deploy
+    steps:
+    - applyYamlConfig:
+        path: ./deploy/deploy.yaml
+timeout: 60
+notification: {}
