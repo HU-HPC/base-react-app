@@ -33,3 +33,4 @@ notification:
     notifier: c-56qv2:n-tvgx2
   condition:
   - Success
+  - Failed
