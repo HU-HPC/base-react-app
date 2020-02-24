@@ -5,7 +5,7 @@ stages:
       image: node:latest
       shellScript: |-
         echo "Building PAP $PACKAGE_VERSION"
-        npm install -g @angular/cli
+        npm install -g react react-dom
         npm install
         ng build --aot
   when:
