@@ -7,7 +7,7 @@ stages:
         echo "Building PAP $PACKAGE_VERSION"
         npm install -g react react-dom
         npm install
-        ng build --aot
+        npm run build
   when:
     branch:
       include:
