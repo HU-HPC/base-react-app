@@ -5,8 +5,8 @@ stages:
       image: node:latest
       shellScript: |-
         echo "Building PAP $PACKAGE_VERSION"
-        npm install -g react react-dom
-        npm install
+        #npm install -g react react-dom
+        #npm install
         npm run build
   when:
     branch:
