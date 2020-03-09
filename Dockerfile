@@ -2,6 +2,7 @@ FROM node:13.10.1-alpine3.11 as build
 
 WORKDIR /web
 COPY ./web/package*.json ./
+RUN npm install -g react react-dom
 RUN npm install
 
 COPY ./web .
