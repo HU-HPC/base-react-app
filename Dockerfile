@@ -12,7 +12,4 @@ FROM nginx:1.17.9-alpine
 
 COPY --from=build /app/build/* /usr/share/nginx/html
 
-COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["nginx" "-g" "daemon off;"]
